@@ -1,1 +1,45 @@
-<p>dashboard works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            
+            <div class="main">
+                <h4>Deposit Form</h4><br>
+            <form (ngSubmit)="deposit()">
+            
+            
+            <input id="log" type="text" class="text" [(ngModel)]="dacno" name="dacno"  placeholder="Account number"><br><br>
+            
+            <input id="pass" type="password" class="text" [(ngModel)]="dpswd" name="dpswd"  placeholder="Password" ><br> <br>
+            <input id="amo" type="text" class="text" [(ngModel)]="damount" name="damount"  placeholder="Amount"><br><br>
+            <input type="submit" value="Deposit" class="button button1 butefct" > <br><br>
+        </form>
+        </div></div>
+        <div class="col-4"></div>
+    </div>
+</div>
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            
+            <div class="main">
+                <h4>Withdraw Form</h4><br>
+            <form (ngSubmit)="withdraw()">
+            
+            
+            <input id="log1" type="text" [(ngModel)]="wacno" name="wacno" class="text"  placeholder="Account number"><br><br>
+            
+            <input id="pass1" type="password" [(ngModel)]="wpswd" name="wpswd" class="text"  placeholder="Password" ><br> <br>
+            <input id="amo1" type="text" [(ngModel)]="wamount" name="wamount" class="text"  placeholder="Amount"><br><br>
+            <input type="submit" value="Withdrawal" class="button butefct" > <br><br>
+        </form>
+        </div></div>
+        <div class="col-4"></div>
+    </div>
+</div>

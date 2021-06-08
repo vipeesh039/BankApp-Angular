@@ -36,19 +36,12 @@ export class LoginComponent implements OnInit {
     var accno=this.accnum
     var pwd=this.pswd
 
-    let details =this.datas.account_details;
-        if (accno in details) {
-            if (pwd == details[accno]["password"]) {
-                alert("login success");
-                this.router.navigateByUrl("dashboard")
-            }
-            else {
-                alert("incorrect password");
-            }
-        }
-        else {
-            alert("invalid account number");
-        }
+    const result=this.datas.login(accno,pwd)
+
+    if(result){
+      alert("login success");
+      this.router.navigateByUrl("dashboard")
+    }
       
   }
  
