@@ -2,16 +2,26 @@
     <div class="row">
         <div class="col-4"></div>
         <div class="col-4">
+            <h1>Welcome {{user}}</h1>
+
+            <h6>Login : {{lDate}}</h6>
+            <h6>Login : {{lDate | date}}</h6>
+            <h6>Login : {{lDate | date | uppercase}}</h6>
+            <h6>Login : {{lDate | date : 'shortDate' }}</h6>
+            <br>
             
-            <div class="main">
-                <h4>Deposit Form</h4><br>
-            <form (ngSubmit)="deposit()">
+            <app-animationdemo></app-animationdemo>
             
+            <div [ngClass]="account? 'deleteStyle' : ''" class="main">
+                <h4 appHighlight>Deposit Form</h4><br>
+            <form [formGroup]="depositForm"  (ngSubmit)="deposit()">
             
-            <input id="log" type="text" class="text" [(ngModel)]="dacno" name="dacno"  placeholder="Account number"><br><br>
-            
-            <input id="pass" type="password" class="text" [(ngModel)]="dpswd" name="dpswd"  placeholder="Password" ><br> <br>
-            <input id="amo" type="text" class="text" [(ngModel)]="damount" name="damount"  placeholder="Amount"><br><br>
+            <input id="log" type="text" class="text" formControlName="dacno" name="dacno"  placeholder="Account number"><br><br>
+            <div *ngIf=" (this.depositForm.get('dacno')?.dirty || this.depositForm.get('dacno')?.touched) && this.depositForm.get('dacno')?.errors" class="error" >Invalid Accountumber</div>
+            <input id="pass" type="password" class="text" formControlName="dpswd" name="dpswd"  placeholder="Password" ><br> <br>
+            <div *ngIf=" (this.depositForm.get('dpswd')?.dirty || this.depositForm.get('dpswd')?.touched) && this.depositForm.get('dpswd')?.errors" class="error" >Invalid Password</div>
+            <input id="amo" type="text" class="text" formControlName="damount" name="damount"  placeholder="Amount"><br><br>
+            <div *ngIf=" (this.depositForm.get('damount')?.dirty || this.depositForm.get('damount')?.touched) && this.depositForm.get('damount')?.errors" class="error" >Invalid Amount</div>
             <input type="submit" value="Deposit" class="button button1 butefct" > <br><br>
         </form>
         </div></div>
@@ -28,18 +38,28 @@
         <div class="col-4"></div>
         <div class="col-4">
             
-            <div class="main">
-                <h4>Withdraw Form</h4><br>
-            <form (ngSubmit)="withdraw()">
+            <div [ngClass]="account? 'deleteStyle' : ''" class="main">
+                <h4 appHighlight>Withdraw Form</h4><br>
+            <form [formGroup]="withdrawForm" (ngSubmit)="withdraw()">
             
             
-            <input id="log1" type="text" [(ngModel)]="wacno" name="wacno" class="text"  placeholder="Account number"><br><br>
-            
-            <input id="pass1" type="password" [(ngModel)]="wpswd" name="wpswd" class="text"  placeholder="Password" ><br> <br>
-            <input id="amo1" type="text" [(ngModel)]="wamount" name="wamount" class="text"  placeholder="Amount"><br><br>
+            <input id="log1" type="text" formControlName="wacno" name="wacno" class="text"  placeholder="Account number"><br><br>
+            <div *ngIf=" (this.withdrawForm.get('wacno')?.dirty || this.withdrawForm.get('wacno')?.touched) && this.withdrawForm.get('wacno')?.errors" class="error" >Invalid Accountumber</div>
+            <input id="pass1" type="password" formControlName="wpswd" name="wpswd" class="text"  placeholder="Password" ><br> <br>
+            <div *ngIf=" (this.withdrawForm.get('wpswd')?.dirty || this.withdrawForm.get('wpswd')?.touched) && this.withdrawForm.get('wpswd')?.errors" class="error" >Invalid Password</div>
+            <input id="amo1" type="text" formControlName="wamount" name="wamount" class="text"  placeholder="Amount"><br><br>
+            <div *ngIf=" (this.withdrawForm.get('wamount')?.dirty || this.withdrawForm.get('wamount')?.touched) && this.withdrawForm.get('wamount')?.errors" class="error" >Invalid Amount</div>
             <input type="submit" value="Withdrawal" class="button butefct" > <br><br>
         </form>
-        </div></div>
+        
+        </div>
+        <br>
+        <br>
+        <app-deleteconfirmation (onCancel)="onCancel()" (onDelete)="onDelete($event)"  [item]="account" ></app-deleteconfirmation>
+        <br><br>
+        <button class="button button1 butefct" type="submit" (click)="deleteAcc()">Delete Account</button>
+    </div>
         <div class="col-4"></div>
     </div>
 </div>
+ 

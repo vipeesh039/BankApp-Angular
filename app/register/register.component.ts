@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
@@ -13,25 +14,39 @@ export class RegisterComponent implements OnInit {
   accnum=""
   pswd=""
 
-  constructor(private dataser:DataService, private router:Router) { }
+  registerForm=this.fb.group({
+    uname:['',[Validators.required,Validators.pattern('[a-zA-Z]*')]],
+    accnum:['',[Validators.required,Validators.pattern('[0-9]*')]],
+    pswd:['',[Validators.required,Validators.pattern('[a-zA-Z0-9]*')]]
+  })
+
+  constructor(private dataser:DataService, private router:Router,private fb:FormBuilder) { }
 
   ngOnInit(): void {
   }
 Register(){
 
-  alert("Register Clicked")
-  var uname=this.uname;
-  var accnum=this.accnum;
-  var pswd=this.pswd;
+  if(this.registerForm.get("uname")?.errors){
+    alert("invalid username")
+  }
+  
+  var uname=this.registerForm.value.uname;
+  var accnum=this.registerForm.value.accnum;
+  var pswd=this.registerForm.value.pswd;
 
-const result=this.dataser.register(uname,accnum,pswd)
-if(result){
-alert("Successfully Registered......")
-this.router.navigateByUrl("")
-}
-else{
-  alert("Account Already Exist, Please Login")
-}
+  if(this.registerForm.valid){
+    const result=this.dataser.register(uname,accnum,pswd)
+    if(result){
+    alert("Successfully Registered......")
+    this.router.navigateByUrl("")
+    }
+    else{
+      alert("Account Already Exist, Please Login")
+    }
+  }
+  else{
+    alert("Form Invalid")
+  }
 
 }
 }

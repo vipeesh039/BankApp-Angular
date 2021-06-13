@@ -6,15 +6,22 @@
             
             <div class="main">
                 <h4>REGISTRATION</h4><br>
+                <form [formGroup]="registerForm" (ngSubmit)="Register()">
+            <input id="uname" type="text" class="text" formControlName="uname" placeholder="User Name"><br><br>
 
-            <input id="uname" type="text" class="text" [(ngModel)]="uname" placeholder="User Name"><br><br>
-            <input id="accno" type="text" class="text" [(ngModel)]="accnum" placeholder="Account number"><br><br>
+            <div *ngIf=" (this.registerForm.get('uname')?.dirty || this.registerForm.get('uname')?.touched) && this.registerForm.get('uname')?.errors" class="error" >Invalid Username</div>
+
+            <input id="accno" type="text" class="text" formControlName="accnum" placeholder="Account number"><br><br>
+
+            <div *ngIf=" (this.registerForm.get('accnum')?.dirty || this.registerForm.get('accnum')?.touched) && this.registerForm.get('accnum')?.errors" class="error" >Invalid Accountumber</div>
+
+            <input id="pwd" type="password" class="text" formControlName="pswd" placeholder="Password" ><br> <br>
+
+            <div *ngIf=" (this.registerForm.get('pswd')?.dirty || this.registerForm.get('pswd')?.touched) && this.registerForm.get('pswd')?.errors" class="error" >Invalid Password</div>
             
-            <input id="pwd" type="password" class="text" [(ngModel)]="pswd" placeholder="Password" ><br> <br>
-            
-            <input type="submit" value="Register" class="button butefct" (click)="Register()"> <br>
+            <input type="submit" value="Register" class="button butefct"> <br>
                 <a class="textfp" routerLink="">LogIn</a>
-        
+            </form>
         </div></div>
         <div class="col-4"></div>
     </div>

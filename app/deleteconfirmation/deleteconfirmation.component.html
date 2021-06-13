@@ -1,0 +1,7 @@
+<div class="iclick" *ngIf=" item != '' ">
+    <p>Do you want to Delete this Account {{item}} </p>
+
+    <button class="btn btn-dark" (click)="delete()" type="submit">Delete</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <button class="btn btn-warning" (click)="cancel()" type="submit">Cancel</button>
+</div>
